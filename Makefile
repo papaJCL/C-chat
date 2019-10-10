@@ -1,4 +1,4 @@
-# To compile your code, do this command: make
+#To compile your code, do this command: make
 # To produce a tar file, do this: make tar
 # To clean up: make clean
 
@@ -6,12 +6,13 @@
 # More -W flags are even better.
 
 CXXFLAGS=-Wall -Werror -Wextra -Wfatal-errors
+assignment=chat
 
-$(chat): $(chat).o
+$(assignment): $(assignment).o
 	g++ $(CXXFLAGS) -o $@ $^
 
 tar:
-	tar -cv $(MAKEFILE_LIST) *.cc >$(chat).tar
+	tar -cv $(MAKEFILE_LIST) *.cc >$(assignment).tar
 
 clean:
-	rm -f $(chat) $(chat).tar *.o *.gch
+	rm -f $(assignment) $(assignment).tar *.o *.gch
