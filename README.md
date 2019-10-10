@@ -1,1 +1,1 @@
-# Simple-Chat-Program-Coded-in-C-
+# Simple-Chat-Program-Coded-in-C++
