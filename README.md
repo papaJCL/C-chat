@@ -1,4 +1,4 @@
-# Simple-Chat-Program-Coded-in-C++
+# Simple-Chat-Program-Coded-in-C++(WIP)
 The program is invoked as follows:
 
 Server side:
