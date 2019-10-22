@@ -69,7 +69,7 @@ void client(string port, string IP){
         cout << "Port must be a number. Please try again!" << endl;
         exit (1);
     }
-    
+    cout << "Valid " << endl;
 }
 
 
@@ -82,28 +82,32 @@ int main(int argc, char *argv[]) {
     if (argc == 1){
         server();
     }
+    else{
+        int opt; 
+        string IP;
+        string port;
     
-    int opt; 
-    string IP;
-    string port;
-    
-    while((opt = getopt(argc, argv, "hp:s:")) != -1)  { 
-        switch(opt)  {  
-            case 'h':
-                help();
-                break;
-            case 'p':
-                port = optarg;
-                break;
-            case 's':
-                IP = optarg;
-                break;
-        }
+        while((opt = getopt(argc, argv, "hp:s:")) != -1)  { 
+            switch(opt)  {  
+                case 'h':
+                    help();
+                    break;
+                case 'p':
+                    port = optarg;
+                    break;
+                case 's':
+                    IP = optarg;
+                    break;
+            }
+        } 
+        client(port,IP);
     }
     
     
     
-    client(port,IP);
+    
+    
+    //client(port,IP);
     
     
     
