@@ -5,7 +5,7 @@
 # You are required to at least use -Wall for warnings.
 # More -W flags are even better.
 
-CXXFLAGS=-Wall -Werror -Wextra -Wfatal-errors
+CXXFLAGS=-Wall -Wextra -Wfatal-errors
 assignment=chat
 
 $(assignment): $(assignment).o
