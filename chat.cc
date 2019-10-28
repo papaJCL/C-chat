@@ -9,6 +9,7 @@
 #include <string.h> 
 #include <arpa/inet.h> 
 #include <netdb.h>
+#include <sstream> 
 
 
 using namespace std;
@@ -23,9 +24,7 @@ void server(){
     struct sockaddr_in client_addr;
     
     int opt = 1;
-    
-    socklen_t addrlen = sizeof(client_addr);            
-        
+            
     sockfd =  socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0){
         cout << "Cannot create a socket" << endl;
@@ -59,7 +58,7 @@ void server(){
     cout << "Found a friend! You receieve first!" << endl;
     
     while(true){
-        int valread = read( newsockfd , buffer, 240);
+        read( newsockfd , buffer, 240);
         cout << "Friend: ";
         cout << buffer;
         cout << "You: ";
@@ -81,11 +80,17 @@ void server(){
     }
 }
 
-void client(string port1, string IP){    
+void client(string sPort, string sIP){    
+    char IP[sIP.length() + 1]; 
+    strcpy(IP, sIP.c_str());
+    
+    stringstream ss(sPort); 
+    int port = 0;
+    ss >> port;
+
     int sockfd;
         
     struct sockaddr_in serv_addr;
-    struct hostent *server;
     
     char buffer[240];
     
@@ -98,10 +103,9 @@ void client(string port1, string IP){
     
     
     serv_addr.sin_family = AF_INET; 
-    serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1"); 
-    serv_addr.sin_port = htons(8080); 
+    serv_addr.sin_addr.s_addr = inet_addr(IP); 
+    serv_addr.sin_port = htons(port); 
     
-    socklen_t addr_size = sizeof serv_addr; 
     int con = connect(sockfd, (struct sockaddr*) &serv_addr, sizeof serv_addr); 
     cout << "Connecting to server... " << endl;
     if (con == 0){
@@ -122,7 +126,7 @@ void client(string port1, string IP){
         }
         send(sockfd , buffer , strlen(buffer) , 0 ); 
         bzero(buffer,240);
-        int valread = read( sockfd , buffer, 240);
+        read( sockfd , buffer, 240);
         cout << "Friend: " << buffer;
     }
     
