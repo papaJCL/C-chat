@@ -19,7 +19,7 @@ void server(){
     cout << "Welcome to chat!" << endl;
     
     int sockfd, newsockfd;
-    char buffer[240];
+    char buffer[1024];
     struct sockaddr_in serv_addr;
     struct sockaddr_in client_addr;
     
@@ -58,25 +58,25 @@ void server(){
     cout << "Found a friend! You receieve first!" << endl;
     
     while(true){
-        read( newsockfd , buffer, 240);
+        read( newsockfd , buffer, 1024);
         cout << "Friend: ";
         cout << buffer;
         cout << "You: ";
-        bzero(buffer,240);
-        fgets(buffer,240,stdin);
+        bzero(buffer,1024);
+        fgets(buffer,1024,stdin);
         while (strlen(buffer) > 140){
             cout << "Error: Input too long" << endl;
             cout << "You: ";
-            bzero(buffer,240);
-            fgets(buffer,240,stdin);
+            bzero(buffer,1024);
+            fgets(buffer,1024,stdin);
             if (strlen(buffer) < 141){
                 send(newsockfd , buffer , strlen(buffer) , 0 ); 
-                bzero(buffer,240); 
+                bzero(buffer,1024); 
                 continue;
             }
         }
         send(newsockfd , buffer , strlen(buffer) , 0 ); 
-        bzero(buffer,240); 
+        bzero(buffer,1024); 
     }
 }
 
@@ -92,7 +92,7 @@ void client(string sPort, string sIP){
         
     struct sockaddr_in serv_addr;
     
-    char buffer[240];
+    char buffer[1024];
     
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     
@@ -118,15 +118,15 @@ void client(string sPort, string sIP){
     }
     while(true){
         cout << "You: ";
-        bzero(buffer,240);
-        fgets(buffer,240,stdin);
+        bzero(buffer,1024);
+        fgets(buffer,1024,stdin);
         if (strlen(buffer) > 140){
             cout << "Error: Input too long" << endl;
             continue;
         }
         send(sockfd , buffer , strlen(buffer) , 0 ); 
-        bzero(buffer,240);
-        read( sockfd , buffer, 240);
+        bzero(buffer,1024);
+        read( sockfd , buffer, 1024);
         cout << "Friend: " << buffer;
     }
     
@@ -138,7 +138,7 @@ void help(){
     cout << "To use this program you want to have two terminals open" << endl;
     cout << "For the first terminal(server side) just type ./chat" << endl;
     cout << "For the second terminal(client side) type ./chat then -p with the port number then -s with the ip number(that is shown from the first terminal)" << endl;
-    cout << "./chat -p 3760 -s 192.168.47.232" << endl;
+    cout << "./chat -p 8080 -s 127.0.0.1" << endl;
     cout << "To see the help menu type ./chat -h" << endl;
     exit(1);
 }
