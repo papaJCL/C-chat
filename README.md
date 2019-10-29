@@ -1,24 +1,15 @@
 # Simple-Chat-Program-Coded-in-C++(WIP)
+This is a basic chat program that requires using two terminals.
+
 The program is invoked as follows:
 
-Server side:
+To invoke the server type ./chat in the first terminal.
 
-$./chat
+If done correctly, the terminal will display an IP and Port # to use. You will need this information for the second terminal.
 
-Client side:
+In the second terminal type ./chat -p (port number) -s (IP number).Where the -p flag indicates the port to connect to and the -s flag indicates the IP address of your friend.
 
-$./chat -p 3790 -s 192.168.47.232
+Example: ./chat -p 3790 -s 192.168.47.232
 
-Where the -p flag indicates the port to connect to and the -s flag indicates the IP address of your friend.
+If you want to produce a help message type ./chat -h
 
-$./chat -h
-
-Should produce a help message and exit.
-
-Without any arguments, the chat program acts as a server, prints out the port it is listening on and waits for
-
-a connection.
-
-With arguments, the program acts as a client connects to a waiting server using the information provided.
-
-With one argument, the program prints the help message and exits.
