@@ -15,6 +15,8 @@
 using namespace std;
 
 
+
+
 void server(){
     cout << "Welcome to chat!" << endl;
     
@@ -34,10 +36,18 @@ void server(){
     if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) { 
         exit(1);
     } 
-        
+    
+    char *iPString; 
+    struct hostent *hostStruct; 
+    char longBuffer[256]; 
+  
+    gethostname(longBuffer, sizeof(longBuffer)); 
+    hostStruct = gethostbyname(longBuffer); 
+    iPString = inet_ntoa(*((struct in_addr*) hostStruct->h_addr_list[0])); 
+     
     memset((char *)&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET; 
-    serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1"); 
+    serv_addr.sin_addr.s_addr = inet_addr(iPString); 
     serv_addr.sin_port = htons( 8080 ); 
     
     
