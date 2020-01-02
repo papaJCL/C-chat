@@ -1,4 +1,4 @@
-# Simple-Chat-Program-Coded-in-C++(WIP)
+# Simple-Chat-Program-Coded-in-C++
 This is a basic chat program that requires using two terminals.
 
 The program is invoked as follows:
